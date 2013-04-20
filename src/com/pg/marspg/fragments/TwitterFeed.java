@@ -42,6 +42,7 @@ public class TwitterFeed extends Fragment {
     {
     	// Get Json
     	JSONObject head = new JSONObject(JsonString);
+    	JSONObject test
     	JSONArray totalResults = head.getJSONArray("results");
     	
     	// Convert into tweet Object
@@ -103,7 +104,12 @@ public class TwitterFeed extends Fragment {
     }
     public void popluateFeedListViews( View v, ArrayList<Tweet> tweets)
     {
+<<<<<<< HEAD
     	ListView listView = (ListView) v.findViewById(R.id.twitterfeed_ListView);
 		listView.setAdapter(new TweetItemAdapter(this.getActivity(), R.layout.listitem, tweets));
+=======
+//    	ListView listView = (ListView) findViewById(R.id.twitterfeed_ListView);
+//		listView.setAdapter(new TweetItemAdapter(this.getActivity(), R.layout.listitem, tweets));
+>>>>>>> e93ae5334af94f0cb3701388256005d69814650d
     }
 }
