@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">MARSPG</string>
+    <string name="weather">Weather</string>
+    <string name="twitter_feed">Twitter Feed</string>
+
+</resources>
