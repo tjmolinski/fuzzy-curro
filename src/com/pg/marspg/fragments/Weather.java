@@ -11,7 +11,7 @@ import com.pg.marspg.OnTaskCompleted;
 import com.pg.marspg.R;
 import com.pg.marspg.RetrieveSiteData;
 import com.pg.marspg.Utilities;
-import com.pg.marspg.WeatherReport;
+import com.pg.marspg.weather.WeatherReport;
 
 public class Weather extends Fragment {
     @Override

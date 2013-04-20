@@ -106,7 +106,7 @@ public class TwitterFeed extends Fragment {
     }
     public void popluateFeedListViews( ArrayList<Tweet> tweets)
     {
-    	ListView listView = (ListView) findViewById(R.id.twitterfeed_ListView);
-		listView.setAdapter(new TweetItemAdapter(this.getActivity(), R.layout.listitem, tweets));
+//    	ListView listView = (ListView) findViewById(R.id.twitterfeed_ListView);
+//		listView.setAdapter(new TweetItemAdapter(this.getActivity(), R.layout.listitem, tweets));
     }
 }
