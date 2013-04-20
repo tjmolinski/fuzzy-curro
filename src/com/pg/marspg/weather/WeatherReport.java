@@ -1,4 +1,4 @@
-package com.pg.marspg;
+package com.pg.marspg.weather;
 
 
 public class WeatherReport {
