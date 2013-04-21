@@ -34,17 +34,15 @@ public class TwitterFeed extends Fragment {
         // Inflate the layout for this fragment
     	View v = inflater.inflate(R.layout.twitter_feed, container, false);
     	
-    	getTwitterFeeds();
-
+    	getTwitterFeeds( v);
         return v;
-        
-        
     }
     
     public ArrayList<Tweet> convertJsonToFeedArray(String JsonString) throws JSONException
     {
     	// Get Json
     	JSONObject head = new JSONObject(JsonString);
+    	JSONObject test
     	JSONArray totalResults = head.getJSONArray("results");
     	
     	// Convert into tweet Object
@@ -69,7 +67,7 @@ public class TwitterFeed extends Fragment {
     	return tweets;
     }
     
-    public void getTwitterFeeds()
+    public void getTwitterFeeds( final View v)
     {
     	Log.e("getTwitterFeeds", "In getTwitterFeeds");
     	(new RetrieveSiteData(new OnTaskCompleted() {
@@ -79,7 +77,7 @@ public class TwitterFeed extends Fragment {
 				{
 					
 					curiosityFeed = convertJsonToFeedArray(result);
-					popluateFeedListViews( curiosityFeed );			
+					popluateFeedListViews( v, curiosityFeed );			
 				}
 				catch(JSONException e)
 				{
@@ -104,9 +102,19 @@ public class TwitterFeed extends Fragment {
 		})).execute(jplFeedURL);
 		*/
     }
-    public void popluateFeedListViews( ArrayList<Tweet> tweets)
+    public void popluateFeedListViews( View v, ArrayList<Tweet> tweets)
     {
+<<<<<<< HEAD
+<<<<<<< HEAD
+    	ListView listView = (ListView) v.findViewById(R.id.twitterfeed_ListView);
+		listView.setAdapter(new TweetItemAdapter(this.getActivity(), R.layout.listitem, tweets));
+=======
 //    	ListView listView = (ListView) findViewById(R.id.twitterfeed_ListView);
 //		listView.setAdapter(new TweetItemAdapter(this.getActivity(), R.layout.listitem, tweets));
+>>>>>>> e93ae5334af94f0cb3701388256005d69814650d
+=======
+//    	ListView listView = (ListView) findViewById(R.id.twitterfeed_ListView);
+//		listView.setAdapter(new TweetItemAdapter(this.getActivity(), R.layout.listitem, tweets));
+>>>>>>> 1fa11fafbf1bb8441524b9e59542edfcaafeaf03
     }
 }
