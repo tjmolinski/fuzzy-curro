@@ -23,7 +23,6 @@ import android.widget.ListView;
 
 import com.pg.marspg.OnTaskCompleted;
 import com.pg.marspg.R;
-import com.pg.marspg.RetrieveImageData;
 import com.pg.marspg.RetrieveSiteData;
 import com.pg.marspg.twitter.Tweet;
 import com.pg.marspg.twitter.TweetItemAdapter;
@@ -60,7 +59,6 @@ public class TwitterFeed extends Fragment {
     	JSONObject curResult;
     	String username, imageurl, text;
     	Bitmap bmp;
-    	RetrieveImageData async;
     	for(int i=0; i< totalResults.length(); i++)
     	{
     		curResult = totalResults.getJSONObject(i);
