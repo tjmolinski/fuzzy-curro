@@ -1,5 +1,6 @@
 package com.pg.marspg.fragments;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -31,11 +32,14 @@ public class Weather extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.weather, container, false);
         
-        (new RetrieveSiteData(new OnTaskCompleted() {
+        (new RetrieveSiteData(getActivity(), new OnTaskCompleted() {
 			@Override
 			public void onTaskCompleted(String result) {
 				parseXml(result);
-				fillInFieldsWithReport(weatherReports.get(weatherReports.size()-1));
+				fillInSelectedForecastWithReport(weatherReports.get(weatherReports.size()-1));
+				fillInSpecificDayForecastWithReport(3, (weatherReports.size()-2>=0?weatherReports.get(weatherReports.size()-2):null));
+				fillInSpecificDayForecastWithReport(2, (weatherReports.size()-3>=0?weatherReports.get(weatherReports.size()-3):null));
+				fillInSpecificDayForecastWithReport(1, (weatherReports.size()-4>=0?weatherReports.get(weatherReports.size()-4):null));
 			}
 		})).execute(Constants.HISTORICAL_MARS_WEATHER_SITE);
         
@@ -61,6 +65,7 @@ public class Weather extends Fragment {
 				int k = i+1;
 				char endPtr = result.charAt(k);
 				
+				//End tag or xml tag was found so lets skip this one
 				if(endPtr == '?' || endPtr == '/') {
 					i++;
 					continue;
@@ -70,14 +75,18 @@ public class Weather extends Fragment {
 					endPtr = result.charAt(k);
 					k++;
 				}
+				
 				startTag = result.substring(i, k);
 				nakedTag = startTag.substring(1, startTag.length()-1);
+				
 				if(nakedTag.equalsIgnoreCase("record") || nakedTag.equalsIgnoreCase("weather_report")) {
-					if(report != null)
+					if(report != null) {
 						weatherReports.add(report);
+					}
+					
 					report = new WeatherReport();
 				} else if(report != null) {
-					data = getDataFromTag(startTag, result.substring(i));
+					data = Utilities.getDataFromXmlTag(startTag, result.substring(i));
 					report.populateData(startTag, data);
 				}
 				i=k;
@@ -85,42 +94,53 @@ public class Weather extends Fragment {
 				i++;
 			}
 		}
+		//Need to add the last one that we populated
 		weatherReports.add(report);
+		weatherReports = WeatherReport.sort(weatherReports);
 	}
 	
-	public void fillInFieldsWithReport(WeatherReport report) {
-		((TextView)getActivity().findViewById(R.id.sol)).setText("Sol: " + report.iSol);
-		((TextView)getActivity().findViewById(R.id.terrestrial_date)).setText(report.sTerrestialDate);
-		((TextView)getActivity().findViewById(R.id.min_temp)).setText("Min temp: " + report.fMinTemp);
-		((TextView)getActivity().findViewById(R.id.max_temp)).setText("Max temp: " + report.fMaxTemp);
-		((TextView)getActivity().findViewById(R.id.pressure)).setText("Pressure: " + report.fPressure);
-		((TextView)getActivity().findViewById(R.id.pressure_string)).setText("Pressure String: " + report.sPressureString);
-		((TextView)getActivity().findViewById(R.id.absolute_humidity)).setText("Absolute Humidity: " + (report.fAbsoluteHumidity>0.0f?report.fAbsoluteHumidity:"--"));
-		((TextView)getActivity().findViewById(R.id.wind_speed)).setText("Wind Speed: " + report.fWindSpeed);
-		((TextView)getActivity().findViewById(R.id.wind_direction)).setText("Wind Direction: " + report.sWindDirection);
-		((TextView)getActivity().findViewById(R.id.atmo_opacity)).setText(report.sAtmosphericOpacity);
-		((TextView)getActivity().findViewById(R.id.season)).setText("Season: " + report.sSeason);
-		((TextView)getActivity().findViewById(R.id.ls)).setText("ls: " + report.fls);
-		((TextView)getActivity().findViewById(R.id.sunrise)).setText("Sunrise: " + report.sSunrise);
-		((TextView)getActivity().findViewById(R.id.sunset)).setText("Sunset: " + report.sSunset);
+	public void fillInSpecificDayForecastWithReport(int dayNum, WeatherReport report) {
+		View selectedDay;
+		switch(dayNum) {
+		case 1:
+			selectedDay = getActivity().findViewById(R.id.day_one);
+			break;
+		case 2:
+			selectedDay = getActivity().findViewById(R.id.day_two);
+			break;
+		case 3:
+			selectedDay = getActivity().findViewById(R.id.day_three);
+			break;
+		default:
+			return;
+		}
+		
+		if(report != null) {
+			((TextView)selectedDay.findViewById(R.id.date)).setText((report.gcTerrestialDate.get(Calendar.MONTH)+1) + "/" + report.gcTerrestialDate.get(Calendar.DAY_OF_MONTH));
+			((TextView)selectedDay.findViewById(R.id.min_temp)).setText(String.valueOf(report.fMinTemp));
+			((TextView)selectedDay.findViewById(R.id.max_temp)).setText(String.valueOf(report.fMaxTemp));
+		} else {
+			((TextView)selectedDay.findViewById(R.id.date)).setText("--/--");
+			((TextView)selectedDay.findViewById(R.id.min_temp)).setText("--");
+			((TextView)selectedDay.findViewById(R.id.max_temp)).setText("--");
+		}
 	}
-
-	private String getDataFromTag(String startTag, String result) {
-		String data = "";
-		String closeTag = Utilities.insertCharacterToString(startTag, 1, '/');
-		int tagSize = closeTag.length();
-		int subPtr = 0;
-		
-		while(!result.substring(subPtr,subPtr+tagSize).equalsIgnoreCase(closeTag)) {
-			subPtr++;
-			if(subPtr+tagSize >= result.length()) break;
-		}
-
-		if(subPtr < result.length()) {
-			data = result.substring(startTag.length(), subPtr);
-		}
-		
-		return data;
+	
+	public void fillInSelectedForecastWithReport(WeatherReport report) {
+		((TextView)getActivity().findViewById(R.id.sol)).setText("Sol: " + report.iSol);
+		((TextView)getActivity().findViewById(R.id.terrestrial_date)).setText(DateFormat.getDateInstance().format(report.gcTerrestialDate.getTime()));
+		((TextView)getActivity().findViewById(R.id.min_temp)).setText(String.valueOf(report.fMinTemp));
+		((TextView)getActivity().findViewById(R.id.max_temp)).setText(String.valueOf(report.fMaxTemp));
+		((TextView)getActivity().findViewById(R.id.pressure)).setText("Pressure:\n" + report.fPressure);
+		((TextView)getActivity().findViewById(R.id.pressure_string)).setText("Pressure String:\n" + report.sPressureString);
+		((TextView)getActivity().findViewById(R.id.absolute_humidity)).setText("Absolute Humidity:\n" + (report.fAbsoluteHumidity>0.0f?report.fAbsoluteHumidity:"--"));
+		((TextView)getActivity().findViewById(R.id.wind_speed)).setText("Wind Speed:\n" + report.fWindSpeed);
+		((TextView)getActivity().findViewById(R.id.wind_direction)).setText("Wind Direction:\n" + report.sWindDirection);
+		((TextView)getActivity().findViewById(R.id.atmo_opacity)).setText(report.sAtmosphericOpacity);
+		((TextView)getActivity().findViewById(R.id.season)).setText("Season:\n" + report.sSeason);
+		((TextView)getActivity().findViewById(R.id.ls)).setText("ls:\n" + report.fls);
+		((TextView)getActivity().findViewById(R.id.sunrise)).setText("Sunrise:\n" + report.sSunrise);
+		((TextView)getActivity().findViewById(R.id.sunset)).setText("Sunset:\n" + report.sSunset);
 	}
 	
 	public void showDatePicker() {
@@ -130,49 +150,15 @@ public class Weather extends Fragment {
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				for(int i = 0; i < weatherReports.size(); i++) {
 					WeatherReport report = weatherReports.get(i);
-					int[] dateObject = Utilities.valueOfStringDate(report.sTerrestialDate);
-					if(dateObject[0] == monthOfYear && dateObject[1] == dayOfMonth && dateObject[2] == year) {
-						fillInFieldsWithReport(report);
+					if(report.gcTerrestialDate.get(Calendar.MONTH) == monthOfYear && report.gcTerrestialDate.get(Calendar.DAY_OF_MONTH) == dayOfMonth && report.gcTerrestialDate.get(Calendar.YEAR) == year) {
+						fillInSelectedForecastWithReport(report);
+						fillInSpecificDayForecastWithReport(3, (i-1>=0?weatherReports.get(i-1):null));
+						fillInSpecificDayForecastWithReport(2, (i-2>=0?weatherReports.get(i-2):null));
+						fillInSpecificDayForecastWithReport(1, (i-3>=0?weatherReports.get(i-3):null));
 						break;
 					}
 				}
 			}
 		}, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)).show();
 	}
-
-//	private void saveHistory(String result) throws IOException {
-//		File sdCard = Environment.getExternalStorageDirectory();
-//		File directory = new File (sdCard.getAbsolutePath() + Constants.SAVED_HISTORICAL_MARS_WEATHER_FILE_DIRECTORY);
-//		directory.mkdirs();
-//		File file = new File(directory, Constants.SAVED_HISTORICAL_MARS_WEATHER_FILE_NAME);
-//		FileOutputStream fOut = new FileOutputStream(file);
-//		OutputStreamWriter osw = new OutputStreamWriter(fOut);
-//		osw.write(result);
-//		osw.flush();
-//		osw.close();
-//	}
-	
-//	private String getContentsOfFile() {
-//		File sdcard = Environment.getExternalStorageDirectory();
-//
-//		//Get the text file
-//		File file = new File(sdcard.getAbsolutePath(), Constants.SAVED_HISTORICAL_MARS_WEATHER_FILE_PATH);
-//
-//		//Read text from file
-//		StringBuilder text = new StringBuilder();
-//
-//		try {
-//		    BufferedReader br = new BufferedReader(new FileReader(file));
-//		    String line;
-//
-//		    while ((line = br.readLine()) != null) {
-//		        text.append(line);
-//		        text.append('\n');
-//		    }
-//		}
-//		catch (IOException e) {
-//		}
-//		
-//		return text.toString();
-//	}
 }

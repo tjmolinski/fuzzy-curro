@@ -8,14 +8,27 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 
 public class RetrieveSiteData extends AsyncTask<String, Void, String> {
 	private OnTaskCompleted completedListener;
+	private ProgressDialog bar;
+	private Context mContext;
 	
-	public RetrieveSiteData(OnTaskCompleted listener) {
+	public RetrieveSiteData(Context context, OnTaskCompleted listener) {
 		completedListener = listener;
+		mContext = context;
 	}
+    @Override
+    protected void onPreExecute() {
+        bar = new ProgressDialog(mContext);
+        bar.setMessage("Going to Mars to see the weather...");
+        bar.setIndeterminate(true);
+        bar.show();
+
+    } 
 	
 	@Override
 	protected String doInBackground(String... urls) {
@@ -44,6 +57,7 @@ public class RetrieveSiteData extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected void onPostExecute(String result) {
+		bar.dismiss();
 		completedListener.onTaskCompleted(result);
 	}
 }

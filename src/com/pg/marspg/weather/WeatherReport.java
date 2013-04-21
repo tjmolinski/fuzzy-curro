@@ -1,10 +1,17 @@
 package com.pg.marspg.weather;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import com.pg.marspg.Utilities;
+
 
 public class WeatherReport {
 	
 	public int iSol;
-	public String sTerrestialDate;
+	public GregorianCalendar gcTerrestialDate;
 	public float fMinTemp;
 	public float fMaxTemp;
 	public float fPressure;
@@ -38,7 +45,11 @@ public class WeatherReport {
 		} else if(nakedTag.equalsIgnoreCase("sol")) {
 			iSol = Integer.valueOf(data);
 		} else if(nakedTag.equalsIgnoreCase("terrestrial_date")) {
-			sTerrestialDate = data;
+			int[] dateObject = Utilities.valueOfStringDate(data);
+			gcTerrestialDate = new GregorianCalendar();
+			gcTerrestialDate.set(Calendar.MONTH, dateObject[0]);
+			gcTerrestialDate.set(Calendar.DAY_OF_MONTH, dateObject[1]);
+			gcTerrestialDate.set(Calendar.YEAR, dateObject[2]);
 		} else if(nakedTag.equalsIgnoreCase("magnitudes")) {
 		} else if(nakedTag.equalsIgnoreCase("min_temp")) {
 			fMinTemp = Float.valueOf(data);
@@ -65,5 +76,24 @@ public class WeatherReport {
 		} else if(nakedTag.equalsIgnoreCase("sunset")) {
 			sSunset = data;
 		}
+	}
+
+	public static ArrayList<WeatherReport> sort(ArrayList<WeatherReport> weatherReports) {
+		WeatherReport[] clonedList = weatherReports.toArray(new WeatherReport[weatherReports.size()]);
+		int size = weatherReports.size();
+		
+		for(int i = 1; i < size; i++) {
+			for(int j = i+1; j < size-1; j++) {
+				long comp1 = clonedList[j-1].gcTerrestialDate.getTimeInMillis();
+				long comp2 = clonedList[j].gcTerrestialDate.getTimeInMillis();
+				if(comp1 > comp2) {
+					WeatherReport temp = clonedList[j-1];
+					clonedList[j-1] = clonedList[j];
+					clonedList[j] = temp;
+				}
+			}
+		}
+		
+		return new ArrayList<WeatherReport>(Arrays.asList(clonedList));
 	}
 }

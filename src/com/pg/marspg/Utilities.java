@@ -54,4 +54,24 @@ public class Utilities {
 		
 		return dateObject;
 	}
+
+	public static String getDataFromXmlTag(String startTag, String result) {
+		String data = "";
+		String closeTag = Utilities.insertCharacterToString(startTag, 1, '/');
+		int tagSize = closeTag.length();
+		int subPtr = 0;
+		
+		if(result.trim().length() > 0) {
+			while(!result.substring(subPtr,subPtr+tagSize).equalsIgnoreCase(closeTag)) {
+				subPtr++;
+				if(subPtr+tagSize >= result.length()) break;
+			}
+	
+			if(subPtr < result.length()) {
+				data = result.substring(startTag.length(), subPtr);
+			}
+		}
+		
+		return data;
+	}
 }

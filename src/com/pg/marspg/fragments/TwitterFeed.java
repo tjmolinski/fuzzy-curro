@@ -78,7 +78,7 @@ public class TwitterFeed extends Fragment {
     public void getTwitterFeeds( final View v)
     {
     	Log.e("getTwitterFeeds", "In getTwitterFeeds");
-    	(new RetrieveSiteData(new OnTaskCompleted() {
+    	(new RetrieveSiteData(getActivity(), new OnTaskCompleted() {
 			@Override
 			public void onTaskCompleted(String result) {
 				try
