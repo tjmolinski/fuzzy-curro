@@ -1,7 +1,9 @@
 package com.pg.marspg.twitter;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,6 @@ import android.widget.ImageView;
 
 public class TweetItemAdapter extends ArrayAdapter<Tweet> {
   private ArrayList<Tweet> tweets;
-private int resourceID;
 
   public TweetItemAdapter(Context context, int textViewResourceId, ArrayList<Tweet> tweets) {
     super(context, textViewResourceId, tweets);
@@ -51,22 +52,12 @@ private int resourceID;
   	if(message != null) {
     	  message.setText(tweet.message);
   	}
-
-  	if(image != null) {
-  		image.setImageBitmap( getBitmap(tweet.image_url));
-      	}
+  	
+  	//if(image != null) {
+  	//	image.setImageBitmap( tweet.image);
+    //  	}
     }
 
     return v;
-  }
-  
-
-public Bitmap getBitmap(String bitmapUrl) {
-  try {
-    URL url = new URL(bitmapUrl);
-    return BitmapFactory.decodeStream(url.openConnection().getInputStream());
-  }
-  catch(Exception ex) {return null;}
-}
-
+    }
 }

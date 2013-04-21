@@ -1,12 +1,18 @@
 package com.pg.marspg.fragments;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.R.array;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -17,6 +23,7 @@ import android.widget.ListView;
 
 import com.pg.marspg.OnTaskCompleted;
 import com.pg.marspg.R;
+import com.pg.marspg.RetrieveImageData;
 import com.pg.marspg.RetrieveSiteData;
 import com.pg.marspg.twitter.Tweet;
 import com.pg.marspg.twitter.TweetItemAdapter;
@@ -25,8 +32,10 @@ public class TwitterFeed extends Fragment {
 	private ArrayList<Tweet> curiosityFeed;
 	private ArrayList<Tweet> jplFeed;
 	
-	private String curiosityFeedURL = "http://search.twitter.com/search.json?q=@MarsCuriosity&rpp=15&page=1";
+	private String curiosityFeedURL = "http://search.twitter.com/search.json?q=from%3Amarscuriosity&rpp=15&page=1";
 	private String jplFeedURL = "http://search.twitter.com/search.json?q=@NASAJPL&rpp=15&page=1";
+	
+	//from%3Amarscuriosity
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,25 +51,26 @@ public class TwitterFeed extends Fragment {
     {
     	// Get Json
     	JSONObject head = new JSONObject(JsonString);
-    	JSONObject test
+    	//JSONObject test
     	JSONArray totalResults = head.getJSONArray("results");
     	
     	// Convert into tweet Object
     	ArrayList<Tweet> tweets = new ArrayList<Tweet>();
     	Tweet tempTweet;
-    	JSONArray curResult;
+    	JSONObject curResult;
     	String username, imageurl, text;
+    	Bitmap bmp;
+    	RetrieveImageData async;
     	for(int i=0; i< totalResults.length(); i++)
     	{
-    		curResult = totalResults.getJSONArray(i);
+    		curResult = totalResults.getJSONObject(i);
     		// username
-    		username = curResult.optString( 1, "Nameless One");
+    		username = curResult.getString("from_user");
     		// image
-    		imageurl = curResult.optString( 10, "");
+    		imageurl = curResult.getString("profile_image_url"); 
     		// text
-    		text = curResult.optString( 13, "Empty");
-    		
-    		tempTweet = new Tweet( username, text, imageurl );
+    		text = curResult.getString("text");
+    		tempTweet = new Tweet( username, text, imageurl);
     		tweets.add( tempTweet );
     	}
     	
@@ -75,9 +85,8 @@ public class TwitterFeed extends Fragment {
 			public void onTaskCompleted(String result) {
 				try
 				{
-					
 					curiosityFeed = convertJsonToFeedArray(result);
-					popluateFeedListViews( v, curiosityFeed );			
+					popluateFeedListViews( v, curiosityFeed );		
 				}
 				catch(JSONException e)
 				{
@@ -104,17 +113,7 @@ public class TwitterFeed extends Fragment {
     }
     public void popluateFeedListViews( View v, ArrayList<Tweet> tweets)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
     	ListView listView = (ListView) v.findViewById(R.id.twitterfeed_ListView);
 		listView.setAdapter(new TweetItemAdapter(this.getActivity(), R.layout.listitem, tweets));
-=======
-//    	ListView listView = (ListView) findViewById(R.id.twitterfeed_ListView);
-//		listView.setAdapter(new TweetItemAdapter(this.getActivity(), R.layout.listitem, tweets));
->>>>>>> e93ae5334af94f0cb3701388256005d69814650d
-=======
-//    	ListView listView = (ListView) findViewById(R.id.twitterfeed_ListView);
-//		listView.setAdapter(new TweetItemAdapter(this.getActivity(), R.layout.listitem, tweets));
->>>>>>> 1fa11fafbf1bb8441524b9e59542edfcaafeaf03
     }
 }
