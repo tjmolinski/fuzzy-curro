@@ -24,8 +24,12 @@ public class WeatherReport {
 	public void populateData(String startTag, String data) {
 		String nakedTag = startTag.substring(1, startTag.length()-1);
 		
-		if(data.equalsIgnoreCase("--")) {
+		if(data.contains("--") || data.contains("xx")) {
 			return;
+		}
+		
+		if(data.contains(",")) {
+			data = data.replaceAll(",", ".");
 		}
 		
 		if(nakedTag.equalsIgnoreCase("weather_report")) {
