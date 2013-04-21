@@ -5,11 +5,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dip" >
 
         <LinearLayout
+            android:id="@+id/selected_forecast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/light_orange"
@@ -23,7 +24,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/sol"
@@ -32,9 +33,8 @@
                 android:layout_margin="5dip"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Sol:"
                 android:textColor="@color/white"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -50,24 +50,42 @@
                 android:layout_weight="1"
                 android:orientation="vertical" >
 
+                <ImageView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/sun"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:id="@+id/atmo_opacity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dip"
+                    android:layout_marginLeft="5dip"
+                    android:layout_marginRight="5dip"
+                    android:layout_marginBottom="5dip"
                     android:gravity="center"
-                    android:text="Atmospheric Opacity:"
                     android:textColor="@color/white"
-                    android:textSize="14dip" />
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal|bottom"
                 android:layout_weight="1"
                 android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/max_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dip"
+                    android:layout_marginRight="5dip"
+                    android:layout_marginTop="5dip"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/min_temp"
@@ -76,24 +94,10 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dip"
                     android:layout_marginRight="5dip"
-                    android:layout_marginTop="5dip"
-                    android:gravity="center"
-                    android:text="Min temp:"
-                    android:textColor="@color/white"
-                    android:textSize="14dip" />
-
-                <TextView
-                    android:id="@+id/max_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="5dip"
-                    android:layout_marginRight="5dip"
                     android:gravity="center"
-                    android:text="Max temp:"
                     android:textColor="@color/white"
-                    android:textSize="14dip" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
