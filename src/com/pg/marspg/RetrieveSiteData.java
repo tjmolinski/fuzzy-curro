@@ -24,7 +24,7 @@ public class RetrieveSiteData extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         bar = new ProgressDialog(mContext);
-        bar.setMessage("Going to Mars to see the weather...");
+        bar.setMessage("Going to Mars to see the weather");
         bar.setIndeterminate(true);
         bar.show();
 

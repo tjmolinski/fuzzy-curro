@@ -41,13 +41,7 @@ public class Weather extends Fragment {
         
         //Caching the data
         if(((Dashboard)getActivity()).getReports().size() <= 0) {
-	        (new RetrieveSiteData(getActivity(), new OnTaskCompleted() {
-				@Override
-				public void onTaskCompleted(String result) {
-					parseXml(result);
-					populateAllFieldsWithIndex(weatherReports.size()-1);
-				}
-			})).execute(Constants.HISTORICAL_MARS_WEATHER_SITE);
+        	getWeatherData();
         } else {
         	weatherReports = ((Dashboard)getActivity()).getReports();
 			populateAllFieldsWithIndex(weatherReports.size()-1);
@@ -57,6 +51,13 @@ public class Weather extends Fragment {
 			@Override
 			public void onClick(View v) {
 				showDatePicker();
+			}
+		});
+        
+        view.findViewById(R.id.refresh_button).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				getWeatherData();
 			}
 		});
 	}
@@ -183,17 +184,27 @@ public class Weather extends Fragment {
 		currentReport = report;
 		((TextView)getActivity().findViewById(R.id.sol)).setText("Sol: " + report.iSol);
 		((TextView)getActivity().findViewById(R.id.terrestrial_date)).setText(DateFormat.getDateInstance().format(report.gcTerrestialDate.getTime()));
-		((TextView)getActivity().findViewById(R.id.min_temp)).setText(String.valueOf(report.fMinTemp));
-		((TextView)getActivity().findViewById(R.id.max_temp)).setText(String.valueOf(report.fMaxTemp));
-		((TextView)getActivity().findViewById(R.id.pressure)).setText("Pressure:\n" + report.fPressure);
-		((TextView)getActivity().findViewById(R.id.pressure_string)).setText("Pressure String:\n" + report.sPressureString);
-		((TextView)getActivity().findViewById(R.id.absolute_humidity)).setText("Absolute Humidity:\n" + (report.fAbsoluteHumidity>0.0f?report.fAbsoluteHumidity:"--"));
-		((TextView)getActivity().findViewById(R.id.wind_speed)).setText("Wind Speed:\n" + report.fWindSpeed);
-		((TextView)getActivity().findViewById(R.id.wind_direction)).setText("Wind Direction:\n" + report.sWindDirection);
+		((TextView)getActivity().findViewById(R.id.min_temp)).setText(String.valueOf(report.fMinTemp) + getString(R.string.celcius));
+		((TextView)getActivity().findViewById(R.id.max_temp)).setText(String.valueOf(report.fMaxTemp) + getString(R.string.celcius));
+		((TextView)getActivity().findViewById(R.id.pressure)).setText(report.fPressure + " " + getString(R.string.pascals));
+		((TextView)getActivity().findViewById(R.id.pressure_string)).setText(report.sPressureString);
+		((TextView)getActivity().findViewById(R.id.absolute_humidity)).setText((report.fAbsoluteHumidity>0.0f?String.valueOf(report.fAbsoluteHumidity):"--"));
+		((TextView)getActivity().findViewById(R.id.wind_speed)).setText(report.fWindSpeed + " " + getString(R.string.kmh));
+		((TextView)getActivity().findViewById(R.id.wind_direction)).setText(report.sWindDirection);
 		((TextView)getActivity().findViewById(R.id.atmo_opacity)).setText(report.sAtmosphericOpacity);
-		((TextView)getActivity().findViewById(R.id.season)).setText("Season:\n" + report.sSeason);
-		((TextView)getActivity().findViewById(R.id.ls)).setText("ls:\n" + report.fls);
-		((TextView)getActivity().findViewById(R.id.sunrise)).setText("Sunrise:\n" + report.sSunrise);
-		((TextView)getActivity().findViewById(R.id.sunset)).setText("Sunset:\n" + report.sSunset);
+		((TextView)getActivity().findViewById(R.id.season)).setText(report.sSeason);
+		((TextView)getActivity().findViewById(R.id.ls)).setText(report.fls + getString(R.string.degree));
+		((TextView)getActivity().findViewById(R.id.sunrise)).setText(report.sSunrise);
+		((TextView)getActivity().findViewById(R.id.sunset)).setText(report.sSunset);
+	}
+	
+	private void getWeatherData() {
+        (new RetrieveSiteData(getActivity(), new OnTaskCompleted() {
+			@Override
+			public void onTaskCompleted(String result) {
+				parseXml(result);
+				populateAllFieldsWithIndex(weatherReports.size()-1);
+			}
+		})).execute(Constants.HISTORICAL_MARS_WEATHER_SITE);
 	}
 }

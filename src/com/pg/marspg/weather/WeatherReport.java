@@ -1,15 +1,19 @@
 package com.pg.marspg.weather;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.pg.marspg.Utilities;
 
 
-public class WeatherReport {
-	
+public class WeatherReport implements Serializable {
+	private static final long serialVersionUID = 702864758944589348L;
 	public int iSol;
 	public GregorianCalendar gcTerrestialDate;
 	public float fMinTemp;

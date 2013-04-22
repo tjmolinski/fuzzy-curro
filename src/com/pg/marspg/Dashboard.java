@@ -51,18 +51,7 @@ public class Dashboard extends FragmentActivity {
         		.setIndicator(feedTab), TwitterFeed.class, null);
         mTabsAdapter.addTab(mTabHost.newTabSpec(Constants.INFORMATION_FRAGMENT_TAG)
         		.setIndicator(informationTab), Information.class, null);
-        
-        Bundle bdle = getIntent().getExtras();
-        if (bdle != null) {
-            mTabHost.setCurrentTabByTag(bdle.getString("tab"));
-        }
 	}
-	
-	@Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("tab", mTabHost.getCurrentTabTag());
-    }
 	
 	public ArrayList<WeatherReport> getReports() {
 		return weatherReports;

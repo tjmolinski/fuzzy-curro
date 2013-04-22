@@ -262,35 +262,80 @@
             android:orientation="horizontal"
             android:paddingTop="10dip" >
 
-            <TextView
-                android:id="@+id/pressure"
-                style="@style/defaultTextStyle"
+            <LinearLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Pressure:" />
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/pressure_string"
-                style="@style/defaultTextStyle"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Pressure String:" />
+                <TextView
+                    style="@style/defaultTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="Pressure:"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/absolute_humidity"
-                style="@style/defaultTextStyle"
+                <TextView
+                    android:id="@+id/pressure"
+                    style="@style/defaultTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Absolute Humidity:" />
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/defaultTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="Pressure String:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/pressure_string"
+                    style="@style/defaultTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/defaultTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="Absolute Humidity:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/absolute_humidity"
+                    style="@style/defaultTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -300,35 +345,80 @@
             android:paddingBottom="10dip"
             android:paddingTop="10dip" >
 
-            <TextView
-                android:id="@+id/wind_speed"
-                style="@style/defaultTextStyle"
+            <LinearLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Wind Speed:" />
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/wind_direction"
-                style="@style/defaultTextStyle"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Wind Direction:" />
+                <TextView
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="Wind Speed:"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/season"
-                style="@style/defaultTextStyle"
+                <TextView
+                    android:id="@+id/wind_speed"
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Season:" />
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="Wind Direction:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/wind_direction"
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="Season:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/season"
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -337,36 +427,93 @@
             android:orientation="horizontal"
             android:paddingTop="10dip" >
 
-            <TextView
-                android:id="@+id/ls"
-                style="@style/defaultTextStyle"
+            <LinearLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="ls:" />
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/sunrise"
-                style="@style/defaultTextStyle"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Sunrise:" />
+                <TextView
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="ls:"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/sunset"
-                style="@style/defaultTextStyle"
+                <TextView
+                    android:id="@+id/ls"
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="sunset:" />
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="Sunrise:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sunrise"
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="Sunset:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sunset"
+                    style="@style/defaultTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/refresh_button"
+            style="@style/defaultTextStyleInBlock"
+            android:layout_width="100dip"
+            android:layout_height="40dip"
+            android:layout_gravity="center"
+            android:background="@color/light_orange"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_margin="20dip"
+            android:text="Refresh" />
     </LinearLayout>
 
 </ScrollView>

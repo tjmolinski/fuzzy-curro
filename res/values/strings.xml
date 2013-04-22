@@ -1,8 +1,12 @@
 <resources>
 
-    <string name="app_name">MARSPG</string>
+    <string name="app_name">Mar\'s Weather</string>
     <string name="weather">Weather</string>
     <string name="twitter_feed">Twitter Feed</string>
     <string name="information">More Info</string>
+    <string name="celcius">&#176;C</string>
+    <string name="pascals">hPa</string>
+    <string name="kmh">kmh</string>
+    <string name="degree">&#176;</string>
 
 </resources>
