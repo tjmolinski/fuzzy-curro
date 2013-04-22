@@ -14,6 +14,7 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowNoTitle">true</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     
@@ -24,6 +25,17 @@
     
     <style name="defaultTextStyle">
         <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+    
+    <style name="defaultTextStyleDetails">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+    
+    <style name="defaultTextStyleHeader">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/dark_grey</item>
     </style>
 

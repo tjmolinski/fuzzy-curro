@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                style="@style/defaultTextStyleHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dip"
+                android:text="Technical Terms" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Mars Solar Day:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="A Sol is the term used to describe one solar day on Mars. A sol lasts about 24 hours 39 minutes and 35.244 seconds. The current sol that is displayed represents how many sols Curiosity has been on Mars." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Min Air Temp:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="The minimum air temperature measured by REMS over the observation period." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Max Air Temp:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="The maximum air temperature measured by REMS over the observation period." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Pressure:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="Atmospheric pressure measured by REMS." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Sunrise/Sunset:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="Sunrise and Sunrise time is in local Mars time. The time is shown in a 24 hour clock with HH::MM. However, the hours and minutes are Martian hours and minutes, 1/60 and 1/1440 of a Martian day, respectively. They are very slightly longer than Earth hours and minutes." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Earth Equivalent Month:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="Refers to the equivalent season on Earth for the current Martian seasonal date. For example, Ls=0 is the start of northern spring and would correspond to late March for the Earth." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Ls:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="Ls stands for Aerocentric solar longitude. This is a measure of the distance in degrees of Mars around its annual orbit of the Sun starting at northern spring. As such, Ls tells you what season or 'date' it currently is on Mars." />
+            </LinearLayout>
+
+            <TextView
+                style="@style/defaultTextStyleHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dip"
+                android:text="Curiosity Rover Specs" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Mission name:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="(MSL) Mars Science Laboratory" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Rover name:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="Curiosity rover" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Size:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="About the size of a small SUV. It is 10 feet long (about 3 meters long), 9 feet wide (2.7 meters wide) and 7 feet tall (2.2 meters tall)." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Arm reach:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="About 7 feet (2.2 meters)" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Weight:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="2,000 pounds (900 kilograms)." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Features:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="Geology lab, rocker-bogie suspension, rock-vaporizing laser and 17 cameras." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Mission:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="To search areas of Mars for past or present conditions favorable for life, and conditions capable of preserving a record of life." />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Launched:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="10:02 a.m. EST on November 26, 2011" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Landed:" />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="1:32 a.m. EDT on August 6, 2012" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip" >
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dip"
+                android:textStyle="bold"
+                    android:text="Length of mission on Mars: " />
+
+                <TextView
+                    style="@style/defaultTextStyleDetails"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:text="The prime mission will last one Mars year or about 23 Earth months." />
+            </LinearLayout>
+
+            <TextView
+                style="@style/defaultTextStyleHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dip"
+                android:text="Mars Specs" />
+
+            <TextView
+                style="@style/defaultTextStyleDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dip"
+                android:text="Mars is the only planet whose surface can be seen in detail from the Earth. It is reddish in color, and was named after the bloody red God of war of the ancient Romans. Mars is the fourth closest planet to the sun. The diameter of Mars is 4,200 miles, a little over half that of the Earth. Mercury is the only planet smaller than Mars." />
+
+            <TextView
+                style="@style/defaultTextStyleDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dip"
+                android:text="Mars is the only planet whose surface can be seen in detail from the Earth. It is reddish in color, and was named after the bloody red God of war of the ancient Romans. Mars is the fourth closest planet to the sun. The diameter of Mars is 4,200 miles, a little over half that of the Earth. Mercury is the only planet smaller than Mars." />
+
+            <TextView
+                style="@style/defaultTextStyleDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dip"
+                android:text="Mars is red because it is rusty. There is a lot of iron in the soil, and the air on Mars has made it turn red-just like rusty iron on Earth." />
+
+            <TextView
+                style="@style/defaultTextStyleDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dip"
+                android:text="Mars has the tallest Volcano in the Solar System named Olympus Mons and it is 15 miles high which is three times the height of Mount Everest." />
+
+            <TextView
+                style="@style/defaultTextStyleDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dip"
+                android:text="Mars orbits the sun every 687 Earth days." />
+
+            <TextView
+                style="@style/defaultTextStyleDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dip"
+                android:text="A hundred pound man would weight 38 pounds on Mars." />
+
+            <TextView
+                style="@style/defaultTextStyleHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dip"
+                android:text="Gale Crater Specs" />
+
+            <TextView
+                style="@style/defaultTextStyleDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="2dip"
+                android:text="The Gale Crater formed when a meteor hit Mars in its early history, about 3.5 to 3.8 billion years ago. The meteor impact punched a large hole into the terrain. The explosive force ejected vast amount of rocks and soil around the crater. NASA scientists chose the Gale Crater as the landing site for Curiosity because it has many signs that water was present over its history." />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

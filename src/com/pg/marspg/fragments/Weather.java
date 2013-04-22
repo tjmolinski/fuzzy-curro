@@ -17,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.pg.marspg.Constants;
+import com.pg.marspg.Dashboard;
 import com.pg.marspg.OnTaskCompleted;
 import com.pg.marspg.R;
 import com.pg.marspg.RetrieveSiteData;
@@ -25,33 +26,40 @@ import com.pg.marspg.weather.WeatherReport;
 
 public class Weather extends Fragment {
 	private ArrayList<WeatherReport> weatherReports = new ArrayList<WeatherReport>();
+	private WeatherReport currentReport;
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.weather, container, false);
+        return inflater.inflate(R.layout.weather, container, false);
+    }
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
         
-        (new RetrieveSiteData(getActivity(), new OnTaskCompleted() {
-			@Override
-			public void onTaskCompleted(String result) {
-				parseXml(result);
-				fillInSelectedForecastWithReport(weatherReports.get(weatherReports.size()-1));
-				fillInSpecificDayForecastWithReport(3, (weatherReports.size()-2>=0?weatherReports.get(weatherReports.size()-2):null));
-				fillInSpecificDayForecastWithReport(2, (weatherReports.size()-3>=0?weatherReports.get(weatherReports.size()-3):null));
-				fillInSpecificDayForecastWithReport(1, (weatherReports.size()-4>=0?weatherReports.get(weatherReports.size()-4):null));
-			}
-		})).execute(Constants.HISTORICAL_MARS_WEATHER_SITE);
+        //Caching the data
+        if(((Dashboard)getActivity()).getReports().size() <= 0) {
+	        (new RetrieveSiteData(getActivity(), new OnTaskCompleted() {
+				@Override
+				public void onTaskCompleted(String result) {
+					parseXml(result);
+					populateAllFieldsWithIndex(weatherReports.size()-1);
+				}
+			})).execute(Constants.HISTORICAL_MARS_WEATHER_SITE);
+        } else {
+        	weatherReports = ((Dashboard)getActivity()).getReports();
+			populateAllFieldsWithIndex(weatherReports.size()-1);
+        }
         
-        v.findViewById(R.id.selected_forecast).setOnClickListener(new OnClickListener() {
+        view.findViewById(R.id.selected_forecast).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				showDatePicker();
 			}
 		});
-        
-        return v;
-    }
+	}
 
 	private void parseXml(String result) {
 		WeatherReport report = null;
@@ -96,7 +104,52 @@ public class Weather extends Fragment {
 		}
 		//Need to add the last one that we populated
 		weatherReports.add(report);
-		weatherReports = WeatherReport.sort(weatherReports);
+		
+		//Store the information into the fragment activity
+		//so we aren't required to regrab the list when we
+		//lose the fragment
+		((Dashboard)getActivity()).setReports(WeatherReport.sort(weatherReports));
+		weatherReports = ((Dashboard)getActivity()).getReports();
+	}
+	
+	public void showDatePicker() {
+		new DatePickerDialog(getActivity(), new OnDateSetListener() {
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+				for(int i = 0; i < weatherReports.size(); i++) {
+					WeatherReport report = weatherReports.get(i);
+					GregorianCalendar cal = new GregorianCalendar();
+					cal.set(year, monthOfYear, dayOfMonth);
+					
+					if(i < 1 && cal.before(report.gcTerrestialDate)) {
+						populateAllFieldsWithIndex(0);
+						return;
+					}
+					
+					if(report.gcTerrestialDate.get(Calendar.MONTH) == monthOfYear && report.gcTerrestialDate.get(Calendar.DAY_OF_MONTH) == dayOfMonth && report.gcTerrestialDate.get(Calendar.YEAR) == year) {
+						populateAllFieldsWithIndex(i);
+						return;
+					}
+					
+					if(report.gcTerrestialDate.after(cal)) {
+						i--;
+						populateAllFieldsWithIndex(i);
+						return;
+					}
+				}
+				
+				//We are trying to access a reading thats ahead of the latest
+				//so take the latest entry
+				populateAllFieldsWithIndex(weatherReports.size()-1);
+			}
+		}, currentReport.gcTerrestialDate.get(Calendar.YEAR), currentReport.gcTerrestialDate.get(Calendar.MONTH), currentReport.gcTerrestialDate.get(Calendar.DAY_OF_MONTH)).show();
+	}
+	
+	public void populateAllFieldsWithIndex(int i) {
+		fillInSelectedForecastWithReport(weatherReports.get(i));
+		fillInSpecificDayForecastWithReport(3, (i-1>=0?weatherReports.get(i-1):null));
+		fillInSpecificDayForecastWithReport(2, (i-2>=0?weatherReports.get(i-2):null));
+		fillInSpecificDayForecastWithReport(1, (i-3>=0?weatherReports.get(i-3):null));
 	}
 	
 	public void fillInSpecificDayForecastWithReport(int dayNum, WeatherReport report) {
@@ -127,6 +180,7 @@ public class Weather extends Fragment {
 	}
 	
 	public void fillInSelectedForecastWithReport(WeatherReport report) {
+		currentReport = report;
 		((TextView)getActivity().findViewById(R.id.sol)).setText("Sol: " + report.iSol);
 		((TextView)getActivity().findViewById(R.id.terrestrial_date)).setText(DateFormat.getDateInstance().format(report.gcTerrestialDate.getTime()));
 		((TextView)getActivity().findViewById(R.id.min_temp)).setText(String.valueOf(report.fMinTemp));
@@ -141,24 +195,5 @@ public class Weather extends Fragment {
 		((TextView)getActivity().findViewById(R.id.ls)).setText("ls:\n" + report.fls);
 		((TextView)getActivity().findViewById(R.id.sunrise)).setText("Sunrise:\n" + report.sSunrise);
 		((TextView)getActivity().findViewById(R.id.sunset)).setText("Sunset:\n" + report.sSunset);
-	}
-	
-	public void showDatePicker() {
-		GregorianCalendar now = new GregorianCalendar();
-		new DatePickerDialog(getActivity(), new OnDateSetListener() {
-			@Override
-			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				for(int i = 0; i < weatherReports.size(); i++) {
-					WeatherReport report = weatherReports.get(i);
-					if(report.gcTerrestialDate.get(Calendar.MONTH) == monthOfYear && report.gcTerrestialDate.get(Calendar.DAY_OF_MONTH) == dayOfMonth && report.gcTerrestialDate.get(Calendar.YEAR) == year) {
-						fillInSelectedForecastWithReport(report);
-						fillInSpecificDayForecastWithReport(3, (i-1>=0?weatherReports.get(i-1):null));
-						fillInSpecificDayForecastWithReport(2, (i-2>=0?weatherReports.get(i-2):null));
-						fillInSpecificDayForecastWithReport(1, (i-3>=0?weatherReports.get(i-3):null));
-						break;
-					}
-				}
-			}
-		}, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)).show();
 	}
 }

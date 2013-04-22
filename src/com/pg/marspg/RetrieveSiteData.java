@@ -32,7 +32,7 @@ public class RetrieveSiteData extends AsyncTask<String, Void, String> {
 	
 	@Override
 	protected String doInBackground(String... urls) {
-	    StringBuilder builder = new StringBuilder(100000);
+	    StringBuilder builder = new StringBuilder(1000000);
 
 	    for (String url : urls) {
 	        DefaultHttpClient client = new DefaultHttpClient();
@@ -46,7 +46,6 @@ public class RetrieveSiteData extends AsyncTask<String, Void, String> {
 	            while ((s = buffer.readLine()) != null) {
 	                builder.append(s);
 	            }
-
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }

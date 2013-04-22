@@ -81,12 +81,13 @@ public class WeatherReport {
 	public static ArrayList<WeatherReport> sort(ArrayList<WeatherReport> weatherReports) {
 		WeatherReport[] clonedList = weatherReports.toArray(new WeatherReport[weatherReports.size()]);
 		int size = weatherReports.size();
-		
-		for(int i = 1; i < size; i++) {
-			for(int j = i+1; j < size-1; j++) {
+
+		//Insert sort
+		for(int i = 2; i < size; i++) {
+			for(int j = i; j > 1; j--) {
 				long comp1 = clonedList[j-1].gcTerrestialDate.getTimeInMillis();
 				long comp2 = clonedList[j].gcTerrestialDate.getTimeInMillis();
-				if(comp1 > comp2) {
+				if(comp2 < comp1) {
 					WeatherReport temp = clonedList[j-1];
 					clonedList[j-1] = clonedList[j];
 					clonedList[j] = temp;
