@@ -1,25 +1,16 @@
 package com.pg.marspg.twitter;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.util.Log;
+import java.util.ArrayList;
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import java.net.URL;
-import java.util.ArrayList;
-
-import com.pg.marspg.R;
-
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.pg.marspg.R;
 
 public class TweetItemAdapter extends ArrayAdapter<Tweet> {
   private ArrayList<Tweet> tweets;

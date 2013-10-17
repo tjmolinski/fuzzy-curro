@@ -1,11 +1,19 @@
 package com.pg.marspg.fragments;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +27,7 @@ import com.pg.marspg.Dashboard;
 import com.pg.marspg.OnTaskCompleted;
 import com.pg.marspg.R;
 import com.pg.marspg.RetrieveSiteData;
+import com.pg.marspg.RetrieveTwitterData;
 import com.pg.marspg.twitter.Tweet;
 import com.pg.marspg.twitter.TweetItemAdapter;
 
@@ -71,24 +80,25 @@ public class TwitterFeed extends Fragment {
 
 	public void getTwitterFeeds(final View v) {
 		Log.e("getTwitterFeeds", "In getTwitterFeeds");
-		if (((Dashboard) getActivity()).getTweets().size() <= 0) {
-			(new RetrieveSiteData(getActivity(), new OnTaskCompleted() {
-				@Override
-				public void onTaskCompleted(String result) {
-					try {
-						curiosityFeed = convertJsonToFeedArray(result);
-						((Dashboard)getActivity()).setTweets(curiosityFeed);
-						popluateFeedListViews(v, curiosityFeed);
-					} catch (JSONException e) {
-						// Dun Goofed
-						Log.e("Dun Goofed", e.toString());
-					}
-				}
-			})).execute(curiosityFeedURL);
-		} else {
-			curiosityFeed = ((Dashboard) getActivity()).getTweets();
-			popluateFeedListViews(v, curiosityFeed);
-		}
+		new RetrieveTwitterData(getActivity()).execute("");
+//		if (((Dashboard) getActivity()).getTweets().size() <= 0) {
+//			(new RetrieveSiteData(getActivity(), new OnTaskCompleted() {
+//				@Override
+//				public void onTaskCompleted(String result) {
+//					try {
+//						curiosityFeed = convertJsonToFeedArray(result);
+//						((Dashboard)getActivity()).setTweets(curiosityFeed);
+//						popluateFeedListViews(v, curiosityFeed);
+//					} catch (JSONException e) {
+//						// Dun Goofed
+//						Log.e("Dun Goofed", e.toString());
+//					}
+//				}
+//			})).execute(curiosityFeedURL);
+//		} else {
+//			curiosityFeed = ((Dashboard) getActivity()).getTweets();
+//			popluateFeedListViews(v, curiosityFeed);
+//		}
 	}
 
 	public void popluateFeedListViews(View v, ArrayList<Tweet> tweets) {
