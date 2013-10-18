@@ -1,15 +1,13 @@
 package com.pg.marspg;
 
-import java.util.List;
-
 import twitter4j.ResponseList;
 import twitter4j.Twitter;
-import twitter4j.TwitterFactory;
 import twitter4j.User;
-import twitter4j.conf.ConfigurationBuilder;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.pg.marspg.twitter.TwitterConfigurator;
 
 public class RetrieveTwitterData extends
 		AsyncTask<String, Void, ResponseList<twitter4j.Status>> {
@@ -31,15 +29,7 @@ public class RetrieveTwitterData extends
 
 	@Override
 	protected ResponseList<twitter4j.Status> doInBackground(String... arg0) {
-		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true)
-		//Need to obscure this
-				.setOAuthConsumerKey("")
-				.setOAuthConsumerSecret("")
-				.setOAuthAccessToken("")
-				.setOAuthAccessTokenSecret("");
-		TwitterFactory tf = new TwitterFactory(cb.build());
-		Twitter twitter = tf.getInstance();
+		Twitter twitter = new TwitterConfigurator().getTwitter();
 		try {
 			String[] srch = new String[] { "MarsCuriosity" };
 			ResponseList<User> users = twitter.lookupUsers(srch);
