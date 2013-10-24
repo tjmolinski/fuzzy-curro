@@ -13,26 +13,65 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pg.marspg.Constants;
 import com.pg.marspg.Dashboard;
-import com.pg.marspg.OnTaskCompleted;
 import com.pg.marspg.R;
-import com.pg.marspg.RetrieveSiteData;
 import com.pg.marspg.Utilities;
+import com.pg.marspg.asynctasks.RetrieveSiteData;
+import com.pg.marspg.interfaces.OnRetrieveSiteDataCompleted;
 import com.pg.marspg.weather.WeatherReport;
 
 public class Weather extends Fragment {
+	
 	private ArrayList<WeatherReport> weatherReports = new ArrayList<WeatherReport>();
 	private WeatherReport currentReport;
 	
+	private TextView tvSol;
+	private TextView tvTerrestialDate;
+	private TextView tvMinTemp;
+	private TextView tvMaxTemp;
+	private TextView tvPressure;
+	private TextView tvPressureString;
+	private TextView tvAbsoluteHumidity;
+	private TextView tvWindSpeed;
+	private TextView tvWindDirection;
+	private TextView tvAtmoOpacity;
+	private TextView tvSeason;
+	private TextView tvLS;
+	private TextView tvSunrise;
+	private TextView tvSunset;
+	
+	private Button btnRefresh;
+	private LinearLayout llSelectedForecast;
+	
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.weather, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View layout =  inflater.inflate(R.layout.weather, container, false);
+        
+    	tvSol = ((TextView)layout.findViewById(R.id.sol));
+    	tvTerrestialDate = ((TextView)layout.findViewById(R.id.terrestrial_date));
+    	tvMinTemp = ((TextView)layout.findViewById(R.id.min_temp));
+    	tvMaxTemp = ((TextView)layout.findViewById(R.id.max_temp));
+    	tvPressure = ((TextView)layout.findViewById(R.id.pressure));
+    	tvPressureString = ((TextView)layout.findViewById(R.id.pressure_string));
+    	tvAbsoluteHumidity = ((TextView)layout.findViewById(R.id.absolute_humidity));
+    	tvWindSpeed = ((TextView)layout.findViewById(R.id.wind_speed));
+    	tvWindDirection = ((TextView)layout.findViewById(R.id.wind_direction));
+    	tvAtmoOpacity = ((TextView)layout.findViewById(R.id.atmo_opacity));
+    	tvSeason = ((TextView)layout.findViewById(R.id.season));
+    	tvLS = ((TextView)layout.findViewById(R.id.ls));
+    	tvSunrise = ((TextView)layout.findViewById(R.id.sunrise));
+    	tvSunset = ((TextView)layout.findViewById(R.id.sunset));
+    	
+    	llSelectedForecast = (LinearLayout) layout.findViewById(R.id.selected_forecast);
+    	btnRefresh = (Button) layout.findViewById(R.id.refresh_button);
+    	
+        return layout;
     }
 
 	@Override
@@ -47,14 +86,14 @@ public class Weather extends Fragment {
 			populateAllFieldsWithIndex(weatherReports.size()-1);
         }
         
-        view.findViewById(R.id.selected_forecast).setOnClickListener(new OnClickListener() {
+        llSelectedForecast.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				showDatePicker();
 			}
 		});
         
-        view.findViewById(R.id.refresh_button).setOnClickListener(new OnClickListener() {
+        btnRefresh.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				getWeatherData();
@@ -103,6 +142,7 @@ public class Weather extends Fragment {
 				i++;
 			}
 		}
+		
 		//Need to add the last one that we populated
 		weatherReports.add(report);
 		
@@ -127,7 +167,9 @@ public class Weather extends Fragment {
 						return;
 					}
 					
-					if(report.gcTerrestialDate.get(Calendar.MONTH) == monthOfYear && report.gcTerrestialDate.get(Calendar.DAY_OF_MONTH) == dayOfMonth && report.gcTerrestialDate.get(Calendar.YEAR) == year) {
+					if(report.gcTerrestialDate.get(Calendar.MONTH) == monthOfYear && 
+							report.gcTerrestialDate.get(Calendar.DAY_OF_MONTH) == dayOfMonth && 
+							report.gcTerrestialDate.get(Calendar.YEAR) == year) {
 						populateAllFieldsWithIndex(i);
 						return;
 					}
@@ -182,29 +224,29 @@ public class Weather extends Fragment {
 	
 	public void fillInSelectedForecastWithReport(WeatherReport report) {
 		currentReport = report;
-		((TextView)getActivity().findViewById(R.id.sol)).setText("Sol: " + report.iSol);
-		((TextView)getActivity().findViewById(R.id.terrestrial_date)).setText(DateFormat.getDateInstance().format(report.gcTerrestialDate.getTime()));
-		((TextView)getActivity().findViewById(R.id.min_temp)).setText(String.valueOf(report.fMinTemp) + getString(R.string.celcius));
-		((TextView)getActivity().findViewById(R.id.max_temp)).setText(String.valueOf(report.fMaxTemp) + getString(R.string.celcius));
-		((TextView)getActivity().findViewById(R.id.pressure)).setText(report.fPressure + " " + getString(R.string.pascals));
-		((TextView)getActivity().findViewById(R.id.pressure_string)).setText(report.sPressureString);
-		((TextView)getActivity().findViewById(R.id.absolute_humidity)).setText((report.fAbsoluteHumidity>0.0f?String.valueOf(report.fAbsoluteHumidity):"--"));
-		((TextView)getActivity().findViewById(R.id.wind_speed)).setText(report.fWindSpeed + " " + getString(R.string.kmh));
-		((TextView)getActivity().findViewById(R.id.wind_direction)).setText(report.sWindDirection);
-		((TextView)getActivity().findViewById(R.id.atmo_opacity)).setText(report.sAtmosphericOpacity);
-		((TextView)getActivity().findViewById(R.id.season)).setText(report.sSeason);
-		((TextView)getActivity().findViewById(R.id.ls)).setText(report.fls + getString(R.string.degree));
-		((TextView)getActivity().findViewById(R.id.sunrise)).setText(report.sSunrise);
-		((TextView)getActivity().findViewById(R.id.sunset)).setText(report.sSunset);
+		tvSol.setText("Sol: " + report.iSol);
+		tvTerrestialDate.setText(DateFormat.getDateInstance().format(report.gcTerrestialDate.getTime()));
+		tvMinTemp.setText(String.valueOf(report.fMinTemp) + getString(R.string.celcius));
+		tvMaxTemp.setText(String.valueOf(report.fMaxTemp) + getString(R.string.celcius));
+		tvPressure.setText(report.fPressure + " " + getString(R.string.pascals));
+		tvPressureString.setText(report.sPressureString);
+		tvAbsoluteHumidity.setText((report.fAbsoluteHumidity>0.0f?String.valueOf(report.fAbsoluteHumidity):"--"));
+		tvWindSpeed.setText(report.fWindSpeed + " " + getString(R.string.kmh));
+		tvWindDirection.setText(report.sWindDirection);
+		tvAtmoOpacity.setText(report.sAtmosphericOpacity);
+		tvSeason.setText(report.sSeason);
+		tvLS.setText(report.fls + getString(R.string.degree));
+		tvSunrise.setText(report.sSunrise);
+		tvSunset.setText(report.sSunset);
 	}
 	
 	private void getWeatherData() {
-        (new RetrieveSiteData(getActivity(), new OnTaskCompleted() {
+        new RetrieveSiteData(getActivity(), new OnRetrieveSiteDataCompleted() {
 			@Override
 			public void onTaskCompleted(String result) {
 				parseXml(result);
 				populateAllFieldsWithIndex(weatherReports.size()-1);
 			}
-		})).execute(Constants.HISTORICAL_MARS_WEATHER_SITE);
+		}).execute(Constants.HISTORICAL_MARS_WEATHER_SITE);
 	}
 }

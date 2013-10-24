@@ -8,5 +8,6 @@
     <string name="pascals">hPa</string>
     <string name="kmh">kmh</string>
     <string name="degree">&#176;</string>
+    <string name="getting_more_info">Going to Mars to check the weather.</string>
 
 </resources>

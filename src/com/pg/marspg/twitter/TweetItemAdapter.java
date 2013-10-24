@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pg.marspg.R;
@@ -20,13 +19,15 @@ public class TweetItemAdapter extends ArrayAdapter<Tweet> {
     this.tweets = tweets;
   }
   
-  
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     View v = convertView;
+    
+    /**
+     * TODO: Change to view holders
+     */
     if (v == null) {
-    	
-    	LayoutInflater vi = (LayoutInflater) this.getContext().getSystemService(this.getContext().LAYOUT_INFLATER_SERVICE);
+    	LayoutInflater vi = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     	v = vi.inflate(R.layout.listitem, null);
     }
 
@@ -34,19 +35,14 @@ public class TweetItemAdapter extends ArrayAdapter<Tweet> {
     if (tweet != null) {
     	TextView username = (TextView) v.findViewById(R.id.ListItem_username);
       	TextView message = (TextView) v.findViewById(R.id.ListItem_message);
-      	ImageView image = (ImageView) v.findViewById(R.id.ListItem_avatar);
 
       	if (username != null) {
-    	  username.setText(tweet.username);
+      		username.setText(tweet.username);
       	}
 
-  	if(message != null) {
-    	  message.setText(tweet.message);
-  	}
-  	
-  	//if(image != null) {
-  	//	image.setImageBitmap( tweet.image);
-    //  	}
+	  	if(message != null) {
+	  		message.setText(tweet.message);
+	  	}
     }
 
     return v;

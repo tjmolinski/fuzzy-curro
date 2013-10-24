@@ -6,11 +6,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.pg.marspg.Utilities;
-
 
 public class WeatherReport implements Serializable {
 	private static final long serialVersionUID = 702864758944589348L;
@@ -29,20 +25,21 @@ public class WeatherReport implements Serializable {
 	public String sSunrise;
 	public String sSunset;
 	
-	public WeatherReport() {
-	}
+	public WeatherReport() { }
 
 	public void populateData(String startTag, String data) {
 		String nakedTag = startTag.substring(1, startTag.length()-1);
 		
-		if(data.contains("--") || data.contains("xx")) {
-			return;
-		}
+		if(data.contains("--") || data.contains("xx")) { return; }
 		
 		if(data.contains(",")) {
 			data = data.replaceAll(",", ".");
 		}
 		
+		/*
+		 * Tags for 'nakedTag' can be found here
+		 * http://cab.inta-csic.es/rems/rems_weather.xml
+		 */
 		if(nakedTag.equalsIgnoreCase("weather_report")) {
 		} else if(nakedTag.equalsIgnoreCase("title")) {	
 		} else if(nakedTag.equalsIgnoreCase("link")) {

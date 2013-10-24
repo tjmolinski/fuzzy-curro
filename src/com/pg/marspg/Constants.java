@@ -7,6 +7,8 @@ public class Constants {
 
 	public final static String MOST_RECENT_MARS_WEATHER_SITE = "http://cab.inta-csic.es/rems/rems_weather.xml";
 	public final static String HISTORICAL_MARS_WEATHER_SITE = "http://data.marsweather.com/rems_climate.xml";
+	
+	public final static String MARS_ROVER_TWITTER_HANDLE = "MarsCuriosity";
 
 	public final static String SAVED_HISTORICAL_MARS_WEATHER_FILE_DIRECTORY = "/HistoricalMarsWeather";
 	public final static String SAVED_HISTORICAL_MARS_WEATHER_FILE_PATH = "/HistoricalMarsWeather/mars_historical_weather.txt";
