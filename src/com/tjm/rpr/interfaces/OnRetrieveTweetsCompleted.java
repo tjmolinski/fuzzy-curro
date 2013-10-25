@@ -1,4 +1,4 @@
-package com.pg.marspg.interfaces;
+package com.tjm.rpr.interfaces;
 
 import twitter4j.ResponseList;
 

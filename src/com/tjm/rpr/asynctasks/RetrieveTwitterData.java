@@ -1,13 +1,13 @@
-package com.pg.marspg.asynctasks;
+package com.tjm.rpr.asynctasks;
 
 import twitter4j.ResponseList;
 import twitter4j.Twitter;
 import twitter4j.User;
 import android.os.AsyncTask;
 
-import com.pg.marspg.Constants;
-import com.pg.marspg.interfaces.OnRetrieveTweetsCompleted;
-import com.pg.marspg.twitter.TwitterConfigurator;
+import com.tjm.rpr.Constants;
+import com.tjm.rpr.interfaces.OnRetrieveTweetsCompleted;
+import com.tjm.rpr.twitter.TwitterConfigurator;
 
 public class RetrieveTwitterData extends AsyncTask<String, Void, ResponseList<twitter4j.Status>> {
 	private OnRetrieveTweetsCompleted completedListener;

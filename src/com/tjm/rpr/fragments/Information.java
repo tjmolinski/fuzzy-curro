@@ -1,12 +1,12 @@
-package com.pg.marspg.fragments;
+package com.tjm.rpr.fragments;
+
+import com.tjm.rpr.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.pg.marspg.R;
 
 public class Information extends Fragment {
 	

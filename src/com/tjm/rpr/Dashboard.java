@@ -1,7 +1,8 @@
-package com.pg.marspg;
+package com.tjm.rpr;
 
 import java.util.ArrayList;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -10,11 +11,11 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.pg.marspg.fragments.Information;
-import com.pg.marspg.fragments.TwitterFeed;
-import com.pg.marspg.fragments.Weather;
-import com.pg.marspg.twitter.Tweet;
-import com.pg.marspg.weather.WeatherReport;
+import com.tjm.rpr.fragments.Information;
+import com.tjm.rpr.fragments.TwitterFeed;
+import com.tjm.rpr.fragments.Weather;
+import com.tjm.rpr.twitter.Tweet;
+import com.tjm.rpr.weather.WeatherReport;
 
 public class Dashboard extends FragmentActivity {
 	private TabHost mTabHost;
@@ -24,6 +25,7 @@ public class Dashboard extends FragmentActivity {
     //Going to cache these values so we don't have to repull
 	private ArrayList<WeatherReport> weatherReports = new ArrayList<WeatherReport>();
 	private ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+	private Dialog mDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,5 +71,14 @@ public class Dashboard extends FragmentActivity {
 	public void setTweets(ArrayList<Tweet> tweetList) {
 		tweets = new ArrayList<Tweet>();
 		tweets = tweetList;
+	}
+
+	public void setDialog(Dialog aDialog) {
+		if(mDialog != null) {
+			mDialog.dismiss();
+		}
+		
+		mDialog = aDialog;
+		mDialog.show();
 	}
 }

@@ -1,4 +1,4 @@
-package com.pg.marspg.weather;
+package com.tjm.rpr.weather;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import com.pg.marspg.Utilities;
+import com.tjm.rpr.Utilities;
 
 public class WeatherReport implements Serializable {
 	private static final long serialVersionUID = 702864758944589348L;

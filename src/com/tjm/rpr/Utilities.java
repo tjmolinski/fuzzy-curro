@@ -1,6 +1,13 @@
-package com.pg.marspg;
+package com.tjm.rpr;
 
+import java.util.Locale;
 import java.util.regex.Pattern;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 public class Utilities {
 	public static String insertCharacterToString(String string, int position, char character) {
@@ -12,9 +19,9 @@ public class Utilities {
 		int[] dateObject = new int[3];
 		String[] brokenUpDate = date.split(" ");
 
-		brokenUpDate[0] = brokenUpDate[0].trim().replaceAll(",", "").replace(".", "").toLowerCase();
-		brokenUpDate[1] = brokenUpDate[1].trim().replaceAll(",", "").replace(".", "").toLowerCase();
-		brokenUpDate[2] = brokenUpDate[2].trim().replaceAll(",", "").replace(".", "").toLowerCase();
+		brokenUpDate[0] = brokenUpDate[0].trim().replaceAll(",", "").replace(".", "").toLowerCase(Locale.US);
+		brokenUpDate[1] = brokenUpDate[1].trim().replaceAll(",", "").replace(".", "").toLowerCase(Locale.US);
+		brokenUpDate[2] = brokenUpDate[2].trim().replaceAll(",", "").replace(".", "").toLowerCase(Locale.US);
 		
 		//Handling metric date format
 		if(Pattern.matches("[a-zA-Z]+", brokenUpDate[1])) {
@@ -73,5 +80,20 @@ public class Utilities {
 		}
 		
 		return data;
+	}
+	
+	public static boolean hasNetworkConnected(Context context) {
+		ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+		NetworkInfo mMobile = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		
+		return mWifi.isConnected() || mMobile.isConnected();
+	}
+	
+	public static AlertDialog createConnectionIssueDialog(Context context) {
+		Builder dBuilder = new Builder(context);
+		dBuilder.setMessage(context.getString(R.string.no_network_connection));
+		dBuilder.setTitle(context.getString(R.string.no_network_connection_title));
+		return dBuilder.create();
 	}
 }

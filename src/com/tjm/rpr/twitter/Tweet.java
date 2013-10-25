@@ -1,4 +1,4 @@
-package com.pg.marspg.twitter;
+package com.tjm.rpr.twitter;
 
 import java.io.Serializable;
 

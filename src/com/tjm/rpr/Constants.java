@@ -1,4 +1,4 @@
-package com.pg.marspg;
+package com.tjm.rpr;
 
 public class Constants {
 	public final static String WEATHER_FRAGMENT_TAG = "WEATHER_FRAGMENT_TAG";

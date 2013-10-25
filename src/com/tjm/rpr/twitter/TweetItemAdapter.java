@@ -1,6 +1,8 @@
-package com.pg.marspg.twitter;
+package com.tjm.rpr.twitter;
 
 import java.util.ArrayList;
+
+import com.tjm.rpr.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import com.pg.marspg.R;
 
 public class TweetItemAdapter extends ArrayAdapter<Tweet> {
   private ArrayList<Tweet> tweets;

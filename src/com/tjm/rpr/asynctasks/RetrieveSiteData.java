@@ -1,4 +1,4 @@
-package com.pg.marspg;
+package com.tjm.rpr.asynctasks;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -12,12 +12,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.tjm.rpr.interfaces.OnRetrieveSiteDataCompleted;
+
 public class RetrieveSiteData extends AsyncTask<String, Void, String> {
-	private OnTaskCompleted completedListener;
+	private OnRetrieveSiteDataCompleted completedListener;
 	private ProgressDialog bar;
 	private Context mContext;
 	
-	public RetrieveSiteData(Context context, OnTaskCompleted listener) {
+	public RetrieveSiteData(Context context, OnRetrieveSiteDataCompleted listener) {
 		completedListener = listener;
 		mContext = context;
 	}

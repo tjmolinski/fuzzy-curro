@@ -1,10 +1,11 @@
-package com.pg.marspg.fragments;
+package com.tjm.rpr.fragments;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
@@ -18,13 +19,13 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.pg.marspg.Constants;
-import com.pg.marspg.Dashboard;
-import com.pg.marspg.R;
-import com.pg.marspg.Utilities;
-import com.pg.marspg.asynctasks.RetrieveSiteData;
-import com.pg.marspg.interfaces.OnRetrieveSiteDataCompleted;
-import com.pg.marspg.weather.WeatherReport;
+import com.tjm.rpr.Constants;
+import com.tjm.rpr.Dashboard;
+import com.tjm.rpr.R;
+import com.tjm.rpr.Utilities;
+import com.tjm.rpr.asynctasks.RetrieveSiteData;
+import com.tjm.rpr.interfaces.OnRetrieveSiteDataCompleted;
+import com.tjm.rpr.weather.WeatherReport;
 
 public class Weather extends Fragment {
 	
@@ -77,7 +78,7 @@ public class Weather extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-        
+		
         //Caching the data
         if(((Dashboard)getActivity()).getReports().size() <= 0) {
         	getWeatherData();
@@ -241,6 +242,12 @@ public class Weather extends Fragment {
 	}
 	
 	private void getWeatherData() {
+		if(!Utilities.hasNetworkConnected(getActivity())) {
+			AlertDialog aDialog = Utilities.createConnectionIssueDialog(getActivity());
+			((Dashboard)getActivity()).setDialog(aDialog);
+			return;
+		}
+		
         new RetrieveSiteData(getActivity(), new OnRetrieveSiteDataCompleted() {
 			@Override
 			public void onTaskCompleted(String result) {

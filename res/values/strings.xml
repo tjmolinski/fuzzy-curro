@@ -4,10 +4,13 @@
     <string name="weather">Weather</string>
     <string name="twitter_feed">Twitter Feed</string>
     <string name="information">More Info</string>
+    <string name="refresh">Refresh</string>
     <string name="celcius">&#176;C</string>
     <string name="pascals">hPa</string>
     <string name="kmh">kmh</string>
     <string name="degree">&#176;</string>
     <string name="getting_more_info">Going to Mars to check the weather.</string>
+    <string name="no_network_connection">Try again when you get internet.</string>
+    <string name="no_network_connection_title">Network Issue</string>
 
 </resources>

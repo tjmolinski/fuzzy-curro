@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/defaultTextStyleInBlock"
+    android:layout_width="match_parent"
+    android:layout_height="40dip"
+    android:background="@color/light_orange"
+    android:gravity="center"
+    android:text="@string/refresh"
+    android:textStyle="bold" />
