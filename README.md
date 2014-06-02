@@ -5,4 +5,4 @@ The app also pulls down the latest twitter feeds of the Curiosity Rover's twitte
 The app also attempts to inform people who may be unfamiliar with the more technical terms aswell as the mission to Mars.
 
 The app can be downlaod from the Google Play store or with this link below.
-https://play.google.com/store/apps/details?id=com.pg.marspg
+https://play.google.com/store/apps/details?id=com.tjm.rpr
